@@ -1,31 +1,56 @@
-import { Schema, model,  } from "mongoose";
-import { TUser } from './user.interface';
-import bcrypt from "bcryptjs";
-const userSchema = new Schema<TUser>(
-    {
-     
-      name: { type: String, required: true },
-      email: { type: String, required: true, unique: true },
-      password: { type: String, required: true },
-      role: { type: String, enum: ['admin', 'customer', 'user'], default: 'customer' },
-      status: { type: String, enum: ['in-progress', 'blocked'], default: 'in-progress' },
-      isDeleted: { type: Boolean, default: false },
+import { model, Schema } from 'mongoose'
+import { IUser } from './user.interface'
+
+const userSchema = new Schema<IUser>({
+  name: {
+    type: String,
+    required: [true, 'Please provide your name'],
+    minlength: 3,
+    maxlength: 50,
+  },
+  age: { type: Number, required: [true, 'Please enter your age'] },
+  email: {
+    type: String,
+    required: [true, 'Please provide your email'],
+    unique: true,
+    validate: {
+      validator: function (value: string) {
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value)
+      },
+      message: '{VALUE} is not a valid email',
     },
-    { timestamps: true }
-  );
-  // 🔹 Password Hashing (Pre-save Hook)
-// ✅ Password Hashing (Pre-save Hook)
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next(); 
-  const salt = await bcrypt.genSalt(10); 
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
+    immutable: true,
+  },
+  photo: String,
+  role: {
+    type: String,
+    enum: {
+      values: ['customer', 'admin'],
+      message: '{VALUE} is not valid, please provide a valid role',
+    },
+    default: 'customer',
+    required: true,
+  },
+  userStatus: {
+    type: String,
+    enum: ['active', 'inactive'],
+    required: true,
+    default: 'active',
+  },
+})
 
+// hook -> pre
+// userSchema.pre('find', function (this, next) {
+//   this.find({ userStatus: { $eq: 'active' } })
+//   next()
+// })
 
-userSchema.methods.comparePassword = async function (enteredPassword: string): Promise<boolean> {
-  return await bcrypt.compare(enteredPassword, this.password); 
-};
-  const UserModel = model<TUser>('User', userSchema);
-  
-  export default UserModel
+// userSchema.post('find', function (docs, next) {
+//   docs.forEach((doc: IUser) => {
+//     doc.name = doc.name.toUpperCase()
+//   })
+//   next()
+// })
+
+const User = model<IUser>('AllUser', userSchema)
+export default User

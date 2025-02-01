@@ -1,11 +1,8 @@
-export type TUser = {
-    
-    name: string;
-    email: string;
-    password: string;
-    role: 'admin' | 'customer' | 'user'; // restricting role to specific values
-    status: 'in-progress' | 'blocked'; // restricting status to specific values
-    isDeleted: boolean;
-    comparePassword: (enteredPassword: string) => Promise<boolean>;
-  };
-  
+export interface IUser {
+  name: string
+  age: number
+  email: string
+  photo?: string | null
+  role: 'customer' | 'admin'
+  userStatus: 'active' | 'inactive'
+}

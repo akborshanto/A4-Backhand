@@ -1,11 +1,12 @@
 import express, { Request, Response } from "express";
 import cors from 'cors'
-import { UserRoutes } from "./module/user/user.routes";
+import userRouter from "./module/user/user.routes";
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 //routes
-app.use('/user',UserRoutes)
+app.use('/api/user',userRouter)
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World sfd');
   });
