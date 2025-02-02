@@ -1,9 +1,38 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const userValidationSchema = z.object({
-  name: z.string().min(3, "Name must be at least 3 characters long"),
-  email: z.string().email("Invalid email format"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
+    name: z
+        .string({
+            invalid_type_error: 'Name must be string',
+        })
+        .min(3, { message: 'Name must be at least 3 characters long' })
+        .max(50, { message: 'Name must be at most 50 characters long' }),
+
+    age: z
+        .number({
+            invalid_type_error: 'Age must be number',
+        })
+        .int()
+        .positive({ message: 'Age must be a positive number' }).optional(),
+
+    email: z
+        .string({
+            invalid_type_error: 'Email must be string',
+        })
+
+        .email({ message: 'Invalid email format' }),
+        password: z.string({
+            required_error: "Password is required",
+            invalid_type_error: "You have to give a valid password",
+          }), 
+        
+    photo: z
+        .string({
+            invalid_type_error: 'Photo must be string',
+        })
+        .optional()
 });
 
-export default userValidationSchema;
+export const UserValidation = {
+    userValidationSchema,
+};

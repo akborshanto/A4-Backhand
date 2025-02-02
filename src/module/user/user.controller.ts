@@ -36,7 +36,7 @@ const getUser = catchAsync(async (req, res) => {
 })
 
 const getSingleUser = catchAsync(async (req, res) => {
-  console.log(req.params)
+
   const userId = req.params.userId
 
   const result = await userService.getSingleUser(userId)
@@ -49,16 +49,20 @@ const getSingleUser = catchAsync(async (req, res) => {
 })
 
 const updateUser = catchAsync(async (req, res) => {
-  const userId = req.params.userId
-  const body = req.body
-  const result = await userService.updateUser(userId, body)
+  const userId = req.params.userId;
+  const body = req.body;
+
+
+  // Call the update function
+  const result = await userService.updateUser(userId, body);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     message: 'User updated successfully',
     data: result,
-  })
-})
+  });
+});
+
 
 const deleteUser = catchAsync(async (req, res) => {
   const userId = req.params.userId

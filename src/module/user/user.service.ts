@@ -19,9 +19,15 @@ const getSingleUser = async (id: string) => {
 }
 
 const updateUser = async (id: string, data: IUser) => {
+  
   const result = await User.findByIdAndUpdate(id, data, {
     new: true,
   })
+
+
+
+
+
   return result
 }
 
