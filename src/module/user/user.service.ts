@@ -23,7 +23,9 @@ const updateUser = async (id: string, data: IUser) => {
   const result = await User.findByIdAndUpdate(id, data, {
     new: true,
   })
-
+//if name will be come 
+// get age by userId
+//add a value key or
 
 
 

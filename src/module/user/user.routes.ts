@@ -8,7 +8,7 @@ userRouter.post('/create-user',async(req:Request,res:Response,next:NextFunction)
 
 
 try {
-    console.log({body:req.body})
+   
    await UserValidation.userValidationSchema.parseAsync(req.body) 
 } catch (error) {
     

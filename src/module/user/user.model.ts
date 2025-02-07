@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { CallbackError, model, Schema } from "mongoose";
 import { IUser } from "./user.interface";
 
 import bcrypt from "bcryptjs";
@@ -29,7 +29,7 @@ const userSchema = new Schema<IUser>({
   password: {
     type: String,
     required: true,
-    
+  select:false
   },
   photo: String,
   role: {
@@ -47,6 +47,14 @@ const userSchema = new Schema<IUser>({
     required: true,
     default: "active",
   },
+
+
+
+
+
+
+
+
 });
 
 userSchema.pre("save", async function (next) {
@@ -57,7 +65,7 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, saltRounds);
     next();
   } catch (error) {
-    next(error);
+    next(error as CallbackError);
   }
 });
 
@@ -79,5 +87,5 @@ userSchema.post("save", function (doc, next) {
 //   next()
 // })
 
-const User = model<IUser>("AllUser", userSchema);
+const User = model<IUser>("A4User", userSchema);
 export default User;
