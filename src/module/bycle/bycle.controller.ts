@@ -40,9 +40,7 @@ const getAllBicycles = async (req: Request, res: Response) => {
   
       const updatedBicycle = await BicycleServices.updateBicycle(id, updateData);
   
-      if (!updatedBicycle) {
-        return res.status(404).json({ error: 'Bicycle not found' });
-      }
+
   
       res.json(updatedBicycle);
     } catch (error) {
@@ -55,10 +53,8 @@ const getAllBicycles = async (req: Request, res: Response) => {
       const { id } = req.params;
   
       const isDeleted = await BicycleServices.deleteBicycle(id);
-  
-      if (!isDeleted) {
-        return res.status(404).json({ error: 'Bicycle not found' });
-      }
+  console.log(isDeleted)
+
   
       res.sendStatus(204);
     } catch (error) {

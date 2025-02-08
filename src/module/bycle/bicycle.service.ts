@@ -16,9 +16,9 @@ const getSingleBicycle = async (id: string) => {
     const result = await BicycleModel.findById(id)
     return result
   }
-  export const updateBicycle = async (id: string, updateData: any) => {
+  export const updateBicycle = async (id: string, updateData: Partial<IBicycle>) => {
     return await BicycleModel.findByIdAndUpdate(id, updateData, { new: true });
-  };
+  }
 
  const deleteBicycle = async (id: string) => {
     console.log(id)
