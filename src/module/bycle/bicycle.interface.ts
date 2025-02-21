@@ -3,5 +3,6 @@ export interface IBicycle {
     brand: string
     price: number
     model: string
-    stock: number
+    stock: number,
+    photo: string,
   }

@@ -22,7 +22,7 @@ const userValidationSchema = z.object({
 
         .email({ message: 'Invalid email format' }),
         password: z.string({
-            required_error: "Password is required",
+           
             invalid_type_error: "You have to give a valid password",
           }), 
         

@@ -18,6 +18,7 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: [true, "Please provide your email"],
     unique: true,
+    lowercase: true,
     validate: {
       validator: function (value: string) {
         return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value);
@@ -31,7 +32,7 @@ const userSchema = new Schema<IUser>({
     required: true,
   select:false
   },
-  photo: String,
+  photo: Object,
   role: {
     type: String,
     enum: {

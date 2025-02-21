@@ -6,7 +6,8 @@ const BicycleSchema: Schema = new Schema({
     brand: { type: String, required: true },
     price: { type: Number, required: true },
     model: { type: String, required: true },
-    stock: { type: Number, required: true, min: 0 }
+    stock: { type: Number, required: true, },
+    photo: { type: String, required: true,  }
   }, { timestamps: true });
   
 

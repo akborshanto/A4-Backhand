@@ -12,7 +12,7 @@ const createBicycleHandler = async (req: Request, res: Response) => {
 //all bicycle
 const getAllBicycles = async (req: Request, res: Response) => {
     try {
-      const bicycles = await BicycleServices.getAllBicycles();
+      const bicycles = await BicycleServices.getAllBicycles(req.query);
       res.json(bicycles);
     } catch (error) {
       res.status(500).json({ error: error });

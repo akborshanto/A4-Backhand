@@ -51,8 +51,6 @@ const getSingleUser = catchAsync(async (req, res) => {
 const updateUser = catchAsync(async (req, res) => {
   const userId = req.params.userId;
   const body = req.body;
-
-
   // Call the update function
   const result = await userService.updateUser(userId, body);
 
@@ -74,6 +72,11 @@ const deleteUser = catchAsync(async (req, res) => {
     data: {},
   })
 })
+
+
+
+
+
 
 export const userController = {
   createUser,

@@ -7,7 +7,7 @@ export interface IUser {
   email: string
   password: string
   age: number
-  photo?: string | null
+  photo?: object | null
   role: 'customer' | 'admin'
   userStatus: 'active' | 'inactive'
 }
