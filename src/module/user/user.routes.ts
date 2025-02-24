@@ -11,9 +11,11 @@ const userRouter = Router()
 userRouter.post('/create-user',userController.createUser)
 userRouter.get('/:userId', userController.getSingleUser)
 userRouter.put('/:userId', userController.updateUser)
+userRouter.get('/data/:email', userController.getSingleEmail)
 //authorizztion user
 userRouter.get('/',userController.getUser)
 userRouter.delete('/:userId', userController.deleteUser)
+// userRouter.get('/', userController.getUser)
 userRouter.get('/', authToken('admin '),userController.getUser)
 
 export default userRouter

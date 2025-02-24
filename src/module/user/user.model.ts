@@ -32,7 +32,7 @@ const userSchema = new Schema<IUser>({
     required: true,
   select:false
   },
-  photo: Object,
+  photo: { type: String, required: true,  },
   role: {
     type: String,
     enum: {

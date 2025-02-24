@@ -47,6 +47,28 @@ const getSingleUser = catchAsync(async (req, res) => {
     data: result,
   })
 })
+//get email user
+const getSingleEmail = catchAsync(async (req, res) => {
+  const email = req.params.email;
+  
+
+  // Ensure that you are searching by email and not by _id
+  const result = await userService.getSingleEmail( email );
+
+  if (!result) {
+    return sendResponse(res, {
+      statusCode: StatusCodes.NOT_FOUND,
+      message: 'User not found',
+      data:result
+    });
+  }
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    message: 'User fetched successfully',
+    data: result,
+  });
+});
 
 const updateUser = catchAsync(async (req, res) => {
   const userId = req.params.userId;
@@ -84,4 +106,5 @@ export const userController = {
   getSingleUser,
   updateUser,
   deleteUser,
+  getSingleEmail
 }

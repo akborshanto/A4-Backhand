@@ -29,8 +29,11 @@ console.log(user,"EMAIL")
 
     // Create token and send to the client
     const jwtPayload = {
+        _id:user?.id,
         email: user.email,
-        role: user.role,
+        role: user?.role,
+        photo:user?.photo,
+        
     };
 
     const token = Jwt.sign(jwtPayload, process.env.JWT_ACCESS_SECRET_KEY as string, { expiresIn: "1d" });

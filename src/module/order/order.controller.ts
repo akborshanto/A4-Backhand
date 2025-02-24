@@ -23,7 +23,7 @@ const createOrder = async (req: Request, res: Response) => {
       totalPrice,
       status: 'pending',
     });
-
+console.log(order)
     await order.save();
 
     res.status(201).json(order);
@@ -31,6 +31,22 @@ const createOrder = async (req: Request, res: Response) => {
     res.status(500).json({error });
   }
 };
+//get user
+const getOrders = async (req: Request, res: Response) => {
+  try {
+    const query = req.body; // Get the userId from the request parameters (or query)
+
+    // Find orders for the specific user
+    const orders = await OrderModel.find(query);
+
+  
+
+    res.status(200).json(orders); // Send orders as the response
+  } catch (error) {
+    res.status(500).json({ error: error }); // Handle server errors
+  }
+};
 export const OrderController={
-    createOrder
+    createOrder,
+    getOrders
 }

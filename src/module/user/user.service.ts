@@ -17,7 +17,7 @@ const getSingleUser = async (id: string) => {
   const result = await User.findById(id)
   return result
 }
-
+//get email
 const updateUser = async (id: string, data: IUser) => {
   
   const result = await User.findByIdAndUpdate(id, data, {
@@ -32,7 +32,13 @@ const updateUser = async (id: string, data: IUser) => {
 
   return result
 }
-
+const getSingleEmail = async (email: string) => {
+  console.log(email)
+  //   const result = await User.findOne({name:"habi jabi"})
+  const result = await User.findOne({email})
+  return result
+}
+//
 const deleteUser = async (id: string) => {
   const result = await User.findByIdAndDelete(id)
   return result
@@ -44,4 +50,5 @@ export const userService = {
   getSingleUser,
   updateUser,
   deleteUser,
+  getSingleEmail
 }

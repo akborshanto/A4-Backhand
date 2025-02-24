@@ -29,6 +29,7 @@ const userValidationSchema = z.object({
     photo: z
         .string({
             invalid_type_error: 'Photo must be string',
+            
         })
         .optional()
 });
