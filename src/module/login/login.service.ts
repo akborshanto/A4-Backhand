@@ -33,7 +33,8 @@ console.log(user,"EMAIL")
         email: user.email,
         role: user?.role,
         photo:user?.photo,
-        
+        name:user?.name
+
     };
 
     const token = Jwt.sign(jwtPayload, process.env.JWT_ACCESS_SECRET_KEY as string, { expiresIn: "1d" });
@@ -41,7 +42,9 @@ console.log(user,"EMAIL")
     const verifiedUser = {
         name: user.name,
         email: user.email,
-        role: user.role
+        role: user.role,
+        photo:user?.photo,
+        
     };
 
     return { token, verifiedUser };

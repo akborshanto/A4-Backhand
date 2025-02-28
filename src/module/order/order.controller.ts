@@ -1,7 +1,11 @@
-import { Request, Response } from 'express';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import e, { Request, Response } from 'express';
 import OrderModel from './order.model';
-
+import config from '../../app/config/config';
 import BicycleModel from './../bycle/bicycle.model';
+import { IUser } from './../user/user.interface';
+import User from '../user/user.model';
+// import { shurjopay } from 'shurjopay';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -46,7 +50,24 @@ const getOrders = async (req: Request, res: Response) => {
     res.status(500).json({ error: error }); // Handle server errors
   }
 };
+//get single order
+const getOrderById = async (req: Request, res: Response) => {
+  try {
+    const { orderId } = req.params; // Extract orderId from URL parameters
+console.log(orderId)
+    // Find the order by its ID
+    const order = await OrderModel.findById(orderId);
+
+    res.status(200).json(order); // Send the order as the response
+  } catch (error) {
+    res.status(500).json({ error: "Server error" }); // Handle server errors
+  }
+};
+
+
 export const OrderController={
     createOrder,
-    getOrders
+    getOrders,
+    getOrderById,
+ 
 }

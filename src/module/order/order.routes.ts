@@ -1,13 +1,18 @@
+import { Router } from "express";
+import { OrderController } from "./order.controller";
 
-import { Router } from 'express'
-import { OrderController } from './order.controller'
+const orderRouter = Router();
 
-const orderRouter = Router()
+// Create Order
+orderRouter.post("/create-order", OrderController.createOrder);
 
-orderRouter.post('/create-order',OrderController.createOrder)
-orderRouter.get('/all-order', OrderController.getOrders)
-// orderRouter.put('/:userId', userController.updateUser)
-// orderRouter.delete('/:userId', userController.deleteUser)
-// orderRouter.get('/', userController.getUser)
+// Get All Orders
+orderRouter.get("/", OrderController.getOrders);
 
-export default orderRouter
+// Get a Single Order by ID
+orderRouter.get("/:orderId", OrderController.getOrderById); // নতুন method ব্যবহার করা হয়েছে
+
+// Uncomment if needed
+// orderRouter.get("/revenue", OrderController.getTotalRevenue);
+
+export default orderRouter;
