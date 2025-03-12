@@ -10,9 +10,9 @@ orderRouter.post("/create-order", OrderController.createOrder);
 orderRouter.get("/", OrderController.getOrders);
 
 // Get a Single Order by ID
-orderRouter.get("/:orderId", OrderController.getOrderById); // নতুন method ব্যবহার করা হয়েছে
-
-// Uncomment if needed
-// orderRouter.get("/revenue", OrderController.getTotalRevenue);
+orderRouter.get("/:orderId", OrderController.getOrderById);
+orderRouter.get("/user/:userId", OrderController.getOrdersByUserId);
+//calculate totalRevenue
+orderRouter.get("/stats/revenue", OrderController.calculateOrder);
 
 export default orderRouter;

@@ -11,8 +11,10 @@ import loginRouter from "./module/login/login.routes";
 const app = express();
 app.use(express.json());
 app.use(cookieParser())
-app.use(cors({origin:'http://localhost:5173',credentials:true}));
-//routes
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://frontend4-beta.vercel.app'],
+  credentials: true
+}));//routes
 // app.use('/api/auth',authRouter)
 app.use('/api/bicycle',BicycleRouter)
 app.use('/api/user',userRouter)

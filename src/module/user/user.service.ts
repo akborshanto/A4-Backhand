@@ -32,12 +32,12 @@ const updateUser = async (id: string, data: IUser) => {
 
   return result
 }
+// Service function to fetch a user by email
 const getSingleEmail = async (email: string) => {
-  console.log(email)
-  //   const result = await User.findOne({name:"habi jabi"})
-  const result = await User.findOne({email})
-  return result
-}
+
+  return await User.findOne( {email: email} ); // Convert email to lowercase
+};
+
 //
 const deleteUser = async (id: string) => {
   const result = await User.findByIdAndDelete(id)
